@@ -1,0 +1,17 @@
+*.swp
+*.orig
+*~
+# mac OS
+.DS_Store
+
+# Directory-based project format
+.idea/
+
+# File-based project format
+*.ipr
+*.iws
+*.imle
+#npm
+node_modules
+npm-debug.log
+bower_components/
