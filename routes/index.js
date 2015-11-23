@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var exec = require('../server/db');
-console.log(exec);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

@@ -1,0 +1,22 @@
+{
+  "name": "order-monitor",
+  "homepage": "https://github.com/weishiji/order-monitor",
+  "authors": [
+    "lxg <liuxiaoguang@chicv.com>"
+  ],
+  "description": "order monitor",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "bootstrap",
+    "chart"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
