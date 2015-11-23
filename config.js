@@ -6,4 +6,4 @@ config.db = {
 	database : 'stylewe'
 }
 
-exports = module.exports = config;
+module.exports = config;
