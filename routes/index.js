@@ -13,9 +13,8 @@ router.get('/', function(req, res, next) {
 		    console.log(data);
 		  });
 		});
-		console.log(rows);
 	})
-	res.render('index', { title: 'Powered By Wang Chi' });
+	res.render('index', { title: 'Order Monitor' });
 });
 
 module.exports = router;

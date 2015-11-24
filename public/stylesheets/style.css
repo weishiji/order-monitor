@@ -1,8 +1,31 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html {
+  position: relative;
+  height: 100%;
 }
-
-a {
-  color: #00B7FF;
+body{
+	min-height: 100%;
+}
+*{
+	box-sizing: border-box;
+}
+.box-canvas{
+	position: absolute;
+	width:50%;
+	height: 50%;
+	display: inline-block;
+}
+.box-canvas.top{
+	top:0;
+}
+.box-canvas.left{
+	left :0;
+}
+.box-canvas.right{
+	right:0;
+}
+.box-canvas.bottom{
+	bottom:0;
+}
+.box-canvas{
+	border:1px solid #ddd;
 }
