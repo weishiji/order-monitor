@@ -1,4 +1,4 @@
-var socket = io('http://localhost:3000');
+var socket = io('http://' + window.location.host);
 var $canvas = $('canvas');
 
 require.config({
@@ -68,18 +68,15 @@ require([
 };
                     
 	socket.on('sellWell', function (data) {
+		console.log(data,new Date())
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
 	 		option.yAxis[0].data.push(temp.product_id);
 	 		option.series[0].data.push(temp.total_quantity);
+	 		myChart.setOption(option);
 	 	}
-	  // 为echarts对象加载数据 
-	 	myChart.setOption(option);
-	 	setTimeout(function(){
-	 		socket.emit('sellWellSuccess', { loop : true });	
-	 	},10000)
 	 	
 	});	
 })
@@ -122,7 +119,6 @@ require([
       },
       axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
         formatter: function(v){
-        	console.log()
           switch (v+''){
               case '20' : return '6';
               case '50': return '15';
@@ -166,9 +162,10 @@ require([
       data:[{value: 50, name: '完成率'}]
   }]
 };
-
-myChart.setOption(option,true);
-   		socket.on('test',function(data){
-   			console.log(data)
-   		})           
+	socket.on('soldAll',function(data){
+		var all = data.sold_total;
+		option.series[0].data[0].value = (all / 300000 * 100) .toFixed(2) - 0;
+    myChart.setOption(option,true);	
+	})
+   	       
 })
