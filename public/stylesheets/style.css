@@ -29,3 +29,7 @@ body{
 .box-canvas{
 	border:1px solid #ddd;
 }
+#order-all{
+	font-size: 80px;
+	text-align: center;
+}

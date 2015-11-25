@@ -176,12 +176,22 @@ require([
           }]
       }]
   };
-
+  var $orderAll = $('#order-all');
+  $orderAll.css('line-height',$orderAll.height() + 'px')
+  var options = {  
+    useEasing: true,
+    useGrouping: true,
+    separator: ',',
+    decimal: '.',
+    prefix: '$',
+    suffix: ''
+  };
 	socket.on('soldAll',function(data){
 		var all = data.sold_total;
 		option.series[0].data[0].value = (all / 300000 * 100) .toFixed(2) - 0;
     myChart.setOption(option,true);	
-
+    var countup = new CountUp($orderAll[0], 0, all, 2, 2.5, options);
+		countup.start();
 	})
    	       
 })
