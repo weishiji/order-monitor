@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 		  socket.on('sellWellSuccess', function (data) {
 		  	if(data.loop){
 		  		exec(sql,['2015-11-19'],function(err,rows){
-			    	socket.emit('sales', rows);
+			    	socket.emit('sellWell', rows);
 			    })	
 		  	}
 		  });
