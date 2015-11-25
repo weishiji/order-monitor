@@ -20,6 +20,7 @@
     "tests"
   ],
   "devDependencies": {
-    "Chart.js": "~1.0.2"
+    "Chart.js": "~1.0.2",
+    "countUp.js": "~1.6.0"
   }
 }
