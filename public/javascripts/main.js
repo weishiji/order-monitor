@@ -67,8 +67,7 @@ require([
     }]
 };
                     
-	socket.on('sales', function (data) {
-	  console.log(data);
+	socket.on('sellWell', function (data) {
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
@@ -78,6 +77,10 @@ require([
 	 	}
 	  // 为echarts对象加载数据 
 	 	myChart.setOption(option);
+	 	setTimeout(function(){
+	 		socket.emit('sellWellSuccess', { loop : true });	
+	 	},10000)
+	 	
 	});	
   
 

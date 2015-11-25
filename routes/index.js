@@ -15,9 +15,13 @@ router.get('/', function(req, res, next) {
     ' limit 5;'
 	exec(sql,['2015-11-19'],function(err,rows){
 		io.on('connection',function (socket) {
-		  socket.emit('sales', rows);
-		  socket.on('my other event', function (data) {
-		    console.log(data);
+		  socket.emit('sellWell', rows);
+		  socket.on('sellWellSuccess', function (data) {
+		  	if(data.loop){
+		  		exec(sql,['2015-11-19'],function(err,rows){
+			    	socket.emit('sales', rows);
+			    })	
+		  	}
 		  });
 		});
 	})
