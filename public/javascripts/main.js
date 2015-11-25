@@ -168,5 +168,7 @@ require([
 };
 
 myChart.setOption(option,true);
-                    
+   		socket.on('test',function(data){
+   			console.log(data)
+   		})           
 })

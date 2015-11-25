@@ -3,6 +3,13 @@ var router = express.Router();
 var io = require('../server/io');
 var exec = require('../server/db');
 
+function getSocket(fun){
+	io.on('connection',function(socket){
+		if(typeof fun === 'function'){
+			fun(socket);
+		}
+	})
+}
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var sql = 'select count(*) as order_count,sum(op.quantity) as total_quantity,' + 
@@ -13,18 +20,18 @@ router.get('/', function(req, res, next) {
     ' group by op.product_id' + 
     ' order by total_quantity desc' + 
     ' limit 5;'
-	exec(sql,['2015-11-19'],function(err,rows){
-		io.on('connection',function (socket) {
-		  socket.emit('sellWell', rows);
-		  socket.on('sellWellSuccess', function (data) {
-		  	if(data.loop){
-		  		exec(sql,['2015-11-19'],function(err,rows){
-			    	socket.emit('sellWell', rows);
-			    })	
-		  	}
-		  });
-		});
-	})
+  function sendSellWellData(socket){
+  	exec(sql,['2015-11-19'],function(err,rows){
+  		socket.emit('sellWell', rows);
+  		socket.on('sellWellSuccess',function(data){
+  			sendSellWellData(socket);
+  		})
+  	})
+  }
+  getSocket(function(socket){
+  	sendSellWellData(socket);
+  })
+  
 	res.render('index', { title: 'Order Monitor' });
 });
 
