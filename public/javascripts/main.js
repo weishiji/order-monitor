@@ -68,7 +68,6 @@ require([
 };
                     
 	socket.on('sellWell', function (data) {
-		console.log(data,new Date())
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
@@ -80,6 +79,59 @@ require([
 	 	
 	});	
 })
+require([
+	'echarts'
+	,'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+	,'echarts/chart/line'
+],function(ec){
+	var myChart = ec.init(document.getElementById('hot-sold')); 
+  var option = {
+    title : {
+      text: '爆款产品前五位',
+      subtext: 'Power By Wangchi'
+    },
+    tooltip : {
+      trigger: 'axis'
+    },
+    legend: {
+      data:[new Date()]
+    },
+    toolbox: {
+      show : true,
+      feature : {
+          restore : {show: true},
+          saveAsImage : {show: true}
+      }
+    },
+    calculable : true,
+    xAxis : [{
+      type : 'value'
+    }],
+    yAxis : [{
+			type : 'category',
+      data : undefined
+    }],
+    series : [{
+      name:'销量',
+      type:'bar',
+      data:undefined
+    }]
+};
+	                  
+	socket.on('hotSold', function (data) {
+		console.log(data,new Date())
+	  option.yAxis[0].data = [];
+	  option.series[0].data = [];
+	 	for(var i=0;i<data.length;i+=1){
+	 		var temp = data[i];
+	 		option.yAxis[0].data.push(temp.name);
+	 		option.series[0].data.push(temp.p_total);
+	 		myChart.setOption(option);
+	 	}
+	});
+})
+
+
 require([
 	'echarts'
 	,'echarts/chart/gauge' // 使用仪表盘就加载gauge模块，按需加载

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var io = require('../server/io');
 var exec = require('../server/db');
+var timeLoop = 5000;
 
 function getSocket(fun){
 	io.on('connection',function(socket){
@@ -39,7 +40,7 @@ router.get('/', function(req, res, next) {
   		socket.emit('sellWell', rows);
   		setTimeout(function(){
   			sendSellWellData(socket)
-  		},5000);
+  		},timeLoop);
   	})
   }
   function sendSoldAllData(socket){
@@ -49,12 +50,34 @@ router.get('/', function(req, res, next) {
 			socket.emit('soldAll',rows[0]);
 			setTimeout(function(){
 				sendSoldAllData(socket);
-			},50000);
+			},timeLoop);
+		})
+  }
+  function sendHotSoldData(socket){
+  	var sql = 'SELECT' + 
+	    ' op.product_id,' + 
+	    ' pd.name,' + 
+	    ' round(sum(op.total), 2) AS p_total' + 
+			' FROM oc_order o' + 
+	    ' INNER JOIN oc_paypal_order po' + 
+	    ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "utc", "+8:00")) = ?)' + 
+	    ' INNER JOIN oc_order_product op ON (o.order_id = op.order_id)' + 
+	    ' INNER JOIN oc_product_description pd on (op.product_id=pd.product_id)' + 
+			' GROUP BY op.product_id' + 
+			' ORDER BY p_total DESC' + 
+			' LIMIT 5;'
+		exec(sql,['2015-11-19'],function(err,rows){
+			console.log(rows)
+			socket.emit('hotSold',rows);
+			setTimeout(function(){
+				sendHotSoldData(socket);
+			},timeLoop);
 		})
   }
   getSocket(function(socket){
   	sendSellWellData(socket);
   	sendSoldAllData(socket);
+  	sendHotSoldData(socket);
   })
 
 	res.render('index', { title: 'Order Monitor' });
