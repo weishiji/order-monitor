@@ -31,14 +31,14 @@ router.get('/', function(req, res, next) {
 	    ' round(sum(op.total), 2) AS m_total' +
 			' FROM oc_order o' +
 	    ' INNER JOIN oc_paypal_order po' +
-      ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = ?)' +
+      ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")))' +
 	    ' INNER JOIN oc_order_product op ON (o.order_id = op.order_id)' +
 	    ' INNER JOIN oc_product p ON (op.product_id = p.product_id)' +
 	    ' INNER JOIN oc_manufacturer m ON (p.manufacturer_id = m.manufacturer_id)' +
 			' GROUP BY m.manufacturer_id' +
 			' ORDER BY m_total DESC' +
 			' LIMIT 5;' 
-  	exec(sql,[currentDate],function(err,rows){
+  	exec(sql,function(err,rows){
   		socket.emit('sellWell', rows);
   		setTimeout(function(){
   			sendSellWellData(socket)
@@ -47,8 +47,8 @@ router.get('/', function(req, res, next) {
   }
   function sendSoldAllData(socket){
   	var sql = 'select sum(po.total) as sold_total from oc_paypal_order as po' + 
-			' where DATE(convert_tz(po.date_added, "+0:00", "+8:00"))=? limit 1;'
-		exec(sql,[currentDate],function(err,rows){
+			' where DATE(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")) limit 1;'
+		exec(sql,function(err,rows){
 			socket.emit('soldAll',rows[0]);
 			setTimeout(function(){
 				sendSoldAllData(socket);
@@ -62,13 +62,13 @@ router.get('/', function(req, res, next) {
 	    ' round(sum(op.total), 2) AS p_total' + 
 			' FROM oc_order o' + 
 	    ' INNER JOIN oc_paypal_order po' + 
-	    ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = ?)' + 
+	    ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")))' + 
 	    ' INNER JOIN oc_order_product op ON (o.order_id = op.order_id)' + 
 	    ' INNER JOIN oc_product_description pd on (op.product_id=pd.product_id)' + 
 			' GROUP BY op.product_id' + 
 			' ORDER BY p_total DESC' + 
 			' LIMIT 5;'
-		exec(sql,[currentDate],function(err,rows){
+		exec(sql,function(err,rows){
 			socket.emit('hotSold',rows);
 			setTimeout(function(){
 				sendHotSoldData(socket);
