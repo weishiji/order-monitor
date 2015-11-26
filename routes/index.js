@@ -6,7 +6,6 @@ var dateFormat = require('dateformat');
 
 var timeLoop = 5000;
 var currentDate = dateFormat(new Date(),'yyyy-mm-dd');
-console.log(currentDate)
 function getSocket(fun){
 	io.on('connection',function(socket){
 		if(typeof fun === 'function'){
