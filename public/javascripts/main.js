@@ -37,7 +37,7 @@ require([
   option = {
     title : {
       text: '设计师销量前五位',
-      subtext: 'Power By Wangchi'
+      subtext: 'Power By Xike Tech'
     },
     tooltip : {
       trigger: 'axis'
@@ -88,7 +88,7 @@ require([
   var option = {
     title : {
       text: '爆款产品前五位',
-      subtext: 'Power By Wangchi'
+      subtext: 'Power By Xike Tech'
     },
     tooltip : {
       trigger: 'axis'
@@ -142,7 +142,7 @@ require([
       },
       title: {
           text: '总订单（单位:万$）',
-          subtext: 'Power By Wangchi'
+          subtext: 'Power By Xike Tech'
       },
       toolbox: {
           show: true,
