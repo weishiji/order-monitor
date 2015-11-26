@@ -37,7 +37,7 @@ require([
   option = {
     title : {
       text: '设计师销量前五位',
-      subtext: 'Power By Xike Tech'
+      subtext: 'Power By Chicv Tech'
     },
     tooltip : {
       trigger: 'axis'
@@ -68,16 +68,16 @@ require([
 };
                     
 	socket.on('sellWell', function (data) {
-		console.log(data,new Date());
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
 	 		option.yAxis[0].data.push(temp.name);
 	 		option.series[0].data.push(temp.m_total);
-	 		myChart.setOption(option);
 	 	}
-	 	
+	 	option.yAxis[0].data.sort(function(a,b){return a - b});
+	 	option.series[0].data.sort(function(a,b){return a - b});
+	 	myChart.setOption(option);
 	});	
 })
 require([
@@ -89,7 +89,7 @@ require([
   var option = {
     title : {
       text: '爆款产品前五位',
-      subtext: 'Power By Xike Tech'
+      subtext: 'Power By Chicv Tech'
     },
     tooltip : {
       trigger: 'axis'
@@ -124,10 +124,12 @@ require([
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
-	 		option.yAxis[0].data.push(temp.name);
+	 		option.yAxis[0].data.push(temp.product_id);
 	 		option.series[0].data.push(temp.p_total);
-	 		myChart.setOption(option);
 	 	}
+	 	option.yAxis[0].data.sort(function(a,b){return a - b});
+	 	option.series[0].data.sort(function(a,b){return a - b});
+	 	myChart.setOption(option);
 	});
 })
 
@@ -143,7 +145,7 @@ require([
       },
       title: {
           text: '总订单（单位:万$）',
-          subtext: 'Power By Xike Tech'
+          subtext: 'Power By Chicv Tech'
       },
       toolbox: {
           show: true,
@@ -238,7 +240,7 @@ require([
     prefix: '$',
     suffix: ''
   };
-  var countup = new CountUp($orderAll[0], 0, 1, 2, 2.5, options);
+  var countup = new CountUp($orderAll[0], 0, 0, 2, 2.5, options);
 	countup.start();	
 	socket.on('soldAll',function(data){
 		var all = data.sold_total;
