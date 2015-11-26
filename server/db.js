@@ -8,9 +8,10 @@ function _exec(sqls,values,after){
             console.log(err);
             return;
         }
-        client.query(sqls || '', values || [],function(err,r){          
+        var query = client.query(sqls || '', values || [],function(err,r){          
             after(err,r);
         });
+        console.log(query.sql);
         client.end();
     });
     client.on('error',function(err) {
