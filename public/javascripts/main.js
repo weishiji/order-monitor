@@ -240,10 +240,21 @@ require([
     prefix: '$',
     suffix: ''
   };
-  var countup = new CountUp($orderAll[0], 0, 0, 2, 2.5, options);
-	countup.start();	
+  var countup = new CountUp($orderAll.find('span')[0], 0, 0, 2, 2.5, options);
+  var diffValue = 0;
+  var $diff = $('')
+	countup.start(function(){
+		$diff.remove();
+	});	
 	socket.on('soldAll',function(data){
+		var originValue = $orderAll.find('span').html().split(',').join('').substr(1) - 0
 		var all = data.sold_total;
+		diffValue = all - originValue;
+		if(diffValue === 0){
+			// $diff = $('<div/>',{
+			// 	'style' : 'position:absolute;top:0;text-align:center;color:green;'
+			// }).html('$' + diffValue).appendTo($orderAll)
+		}
 		option.series[0].data[0].value = (all / 300000 * 100) .toFixed(2) - 0;
     myChart.setOption(option,true);	
     countup.update(all);
