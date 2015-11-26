@@ -119,7 +119,6 @@ require([
 };
 	                  
 	socket.on('hotSold', function (data) {
-		console.log(data,new Date())
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
