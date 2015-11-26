@@ -186,12 +186,13 @@ require([
     prefix: '$',
     suffix: ''
   };
+  var countup = new CountUp($orderAll[0], 0, 1, 2, 2.5, options);
+	countup.start();	
 	socket.on('soldAll',function(data){
 		var all = data.sold_total;
 		option.series[0].data[0].value = (all / 300000 * 100) .toFixed(2) - 0;
     myChart.setOption(option,true);	
-    var countup = new CountUp($orderAll[0], 0, all, 2, 2.5, options);
-		countup.start();
+    countup.update(all);
 	})
    	       
 })
