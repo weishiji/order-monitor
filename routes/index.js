@@ -49,6 +49,7 @@ router.get('/', function(req, res, next) {
   	var sql = 'select sum(po.total) as sold_total from oc_paypal_order as po' + 
 			' where DATE(convert_tz(po.date_added, "+0:00", "+8:00"))=? limit 1;'
 		exec(sql,[currentDate],function(err,rows){
+			console.log(rows);
 			socket.emit('soldAll',rows[0]);
 			setTimeout(function(){
 				sendSoldAllData(socket);

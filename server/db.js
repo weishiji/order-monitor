@@ -8,7 +8,7 @@ function _exec(sqls,values,after){
         after(err,r);
     });
 
-    console.log(query.sql)
+    //console.log(query.sql)
 
     client.end();
 
