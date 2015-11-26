@@ -11,7 +11,7 @@ function _exec(sqls,values,after){
         var query = client.query(sqls || '', values || [],function(err,r){          
             after(err,r);
         });
-        console.log(query.sql);
+        //console.log(query.sql);
         client.end();
     });
     client.on('error',function(err) {
