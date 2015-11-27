@@ -72,7 +72,6 @@ function sendSellWellData(socket){
 			},timeLoop);
 		})
   }
-
   getSocket(function(socket){
   	sendSellWellData(socket);
   	sendSoldAllData(socket);
