@@ -72,11 +72,11 @@ require([
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
-	 		option.yAxis[0].data.push(temp.name);
-	 		option.series[0].data.push(temp.m_total);
+	 		option.yAxis[0].data.unshift(temp.name);
+	 		option.series[0].data.unshift(temp.m_total);
 	 	}
-	 	option.yAxis[0].data.sort(function(a,b){return a - b});
-	 	option.series[0].data.sort(function(a,b){return a - b});
+	 	//option.yAxis[0].data.sort(function(a,b){return a - b});
+	 	//option.series[0].data.sort(function(a,b){return a - b});
 	 	myChart.setOption(option);
 	});	
 })
@@ -124,11 +124,11 @@ require([
 	  option.series[0].data = [];
 	 	for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
-	 		option.yAxis[0].data.push(temp.product_id);
-	 		option.series[0].data.push(temp.p_total);
+	 		option.yAxis[0].data.unshift(temp.product_id);
+	 		option.series[0].data.unshift(temp.p_total);
 	 	}
-	 	option.yAxis[0].data.sort(function(a,b){return a - b});
-	 	option.series[0].data.sort(function(a,b){return a - b});
+	 	//option.yAxis[0].data.sort(function(a,b){return a - b});
+	 	//option.series[0].data.sort(function(a,b){return a - b});
 	 	myChart.setOption(option);
 	});
 })
