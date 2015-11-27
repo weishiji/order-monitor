@@ -56,13 +56,14 @@ function sendSellWellData(socket){
   	var sql = 'SELECT' + 
 	    ' op.product_id,' + 
 	    ' pd.name,' + 
-	    ' round(sum(op.total), 2) AS p_total' + 
+	    ' round(sum(op.total), 2) AS p_total,' + 
 	    ' p.image' +
 			' FROM oc_order o' + 
 	    ' INNER JOIN oc_paypal_order po' + 
 	    ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")))' + 
 	    ' INNER JOIN oc_order_product op ON (o.order_id = op.order_id)' + 
 	    ' INNER JOIN oc_product_description pd on (op.product_id=pd.product_id)' + 
+	    ' INNER JOIN oc_product p on (op.product_id=p.product_id)'
 			' GROUP BY op.product_id' + 
 			' ORDER BY p_total DESC' + 
 			' LIMIT 5;'
