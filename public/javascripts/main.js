@@ -132,8 +132,8 @@ require([
 	 		option.series[0].data.unshift(temp.p_total);
       markPointData.push({
         yAxis:data.length-1-i,
-        symbolSize:20,
-        symbol:"https://www.stylewe.com/image_cache/resize/50x50/image/"+temp.image
+        symbolSize:50,
+        symbol:"https://www.stylewe.com/image_cache/resize/80x80/image/"+temp.image
       });
 	 	}
     option.series[0].markPoint.data=markPointData;
