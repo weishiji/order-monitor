@@ -36,14 +36,14 @@ require([
   };
   option = {
     title : {
-      text: '设计师销量前五位',
+      text: '设计师销量前五位（单位:$）',
       subtext: 'Power By Chicv Tech'
     },
     tooltip : {
       trigger: 'axis'
     },
     legend: {
-      data:[new Date()]
+      data:['']
     },
     toolbox: {
       show : true,
@@ -88,14 +88,14 @@ require([
 	var myChart = ec.init(document.getElementById('hot-sold')); 
   var option = {
     title : {
-      text: '爆款产品前五位',
+      text: '爆款产品前五位（单位:$）',
       subtext: 'Power By Chicv Tech'
     },
     tooltip : {
       trigger: 'axis'
     },
     legend: {
-      data:[new Date()]
+      data:['']
     },
     toolbox: {
       show : true,

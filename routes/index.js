@@ -4,7 +4,7 @@ var io = require('../server/io');
 var exec = require('../server/db');
 var dateFormat = require('dateformat');
 
-var timeLoop = 5000;
+var timeLoop = 15000;
 var currentDate = dateFormat(new Date(),'yyyy-mm-dd');
 function getSocket(fun){
 	io.on('connection',function(socket){
