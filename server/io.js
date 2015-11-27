@@ -57,6 +57,7 @@ function sendSellWellData(socket){
 	    ' op.product_id,' + 
 	    ' pd.name,' + 
 	    ' round(sum(op.total), 2) AS p_total' + 
+	    ' p.image' +
 			' FROM oc_order o' + 
 	    ' INNER JOIN oc_paypal_order po' + 
 	    ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")))' + 
