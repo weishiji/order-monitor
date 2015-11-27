@@ -115,28 +115,18 @@ require([
     series : [{
       name:'销量',
       type:'bar',
-      data:undefined,
-      markPoint:{
-        data:[]
-      }
+      data:undefined
     }]
 };
 	                  
 	socket.on('hotSold', function (data) {
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
-    var markPointData = [];
 	 	for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
 	 		option.yAxis[0].data.unshift(temp.product_id);
 	 		option.series[0].data.unshift(temp.p_total);
-      markPointData.push({
-        yAxis:data.length-1-i,
-        symbolSize:50,
-        symbol:"https://www.stylewe.com/image_cache/resize/80x80/image/"+temp.image
-      });
 	 	}
-    option.series[0].markPoint.data=markPointData;
 	 	//option.yAxis[0].data.sort(function(a,b){return a - b});
 	 	//option.series[0].data.sort(function(a,b){return a - b});
 	 	myChart.setOption(option);

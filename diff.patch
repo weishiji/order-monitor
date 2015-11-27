@@ -1,0 +1,54 @@
+diff --git a/public/javascripts/main.js b/public/javascripts/main.js
+index 0020d46..8bd06d5 100644
+--- a/public/javascripts/main.js
++++ b/public/javascripts/main.js
+@@ -115,18 +115,28 @@ require([
+     series : [{
+       name:'销量',
+       type:'bar',
+-      data:undefined
++      data:undefined,
++      markPoint:{
++        data:[]
++      }
+     }]
+ };
+ 	                  
+ 	socket.on('hotSold', function (data) {
+ 	  option.yAxis[0].data = [];
+ 	  option.series[0].data = [];
++    var markPointData = [];
+ 	 	for(var i=0;i<data.length;i+=1){
+ 	 		var temp = data[i];
+ 	 		option.yAxis[0].data.unshift(temp.product_id);
+ 	 		option.series[0].data.unshift(temp.p_total);
++      markPointData.push({
++        yAxis:data.length-1-i,
++        symbolSize:50,
++        symbol:"https://www.stylewe.com/image_cache/resize/80x80/image/"+temp.image
++      });
+ 	 	}
++    option.series[0].markPoint.data=markPointData;
+ 	 	//option.yAxis[0].data.sort(function(a,b){return a - b});
+ 	 	//option.series[0].data.sort(function(a,b){return a - b});
+ 	 	myChart.setOption(option);
+diff --git a/server/io.js b/server/io.js
+index afde160..7a8bc8b 100644
+--- a/server/io.js
++++ b/server/io.js
+@@ -56,12 +56,14 @@ function sendSellWellData(socket){
+   	var sql = 'SELECT' + 
+ 	    ' op.product_id,' + 
+ 	    ' pd.name,' + 
+-	    ' round(sum(op.total), 2) AS p_total' + 
++	    ' round(sum(op.total), 2) AS p_total,' + 
++	    ' p.image' +
+ 			' FROM oc_order o' + 
+ 	    ' INNER JOIN oc_paypal_order po' + 
+ 	    ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")))' + 
+ 	    ' INNER JOIN oc_order_product op ON (o.order_id = op.order_id)' + 
+ 	    ' INNER JOIN oc_product_description pd on (op.product_id=pd.product_id)' + 
++	    ' INNER JOIN oc_product p on (op.product_id=p.product_id)'
+ 			' GROUP BY op.product_id' + 
+ 			' ORDER BY p_total DESC' + 
+ 			' LIMIT 5;'
