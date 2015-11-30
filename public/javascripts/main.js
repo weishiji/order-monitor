@@ -1,5 +1,6 @@
 var socket = io('http://' + window.location.host);
 var $canvas = $('canvas');
+var MAX = 20;
 
 require.config({
 	paths: {
@@ -181,13 +182,13 @@ require([
               formatter: function(v) {
                   switch (v + '') {
                       case '20':
-                          return '6';
+                          return parseInt((20/100 * MAX)).toString();
                       case '50':
-                          return '15';
+                          return parseInt((50/100 * MAX)).toString();
                       case '80':
-                          return '24';
+                          return parseInt((80/100 * MAX)).toString();
                       case '100':
-                          return '30';
+                          return parseInt((100/100 * MAX)).toString();
                       default:
                           return '';
                   }
@@ -255,7 +256,7 @@ require([
 			// 	'style' : 'position:absolute;top:0;text-align:center;color:green;'
 			// }).html('$' + diffValue).appendTo($orderAll)
 		}
-		option.series[0].data[0].value = (all / 300000 * 100) .toFixed(2) - 0;
+		option.series[0].data[0].value = (all / MAX * 100) .toFixed(2) - 0;
     myChart.setOption(option,true);	
     countup.update(all);
 	})
