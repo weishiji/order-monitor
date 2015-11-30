@@ -9,5 +9,6 @@ How to install
  7. cd to path/public
  8. bower install
  9. cd to path
- 10. forever start ./bin/www
+ 10. rename config.js.sample to config.js
+ 11. forever start ./bin/www
 ```
