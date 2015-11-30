@@ -256,7 +256,7 @@ require([
 			// 	'style' : 'position:absolute;top:0;text-align:center;color:green;'
 			// }).html('$' + diffValue).appendTo($orderAll)
 		}
-		option.series[0].data[0].value = (all / MAX / 1000 * 100) .toFixed(2) - 0;
+		option.series[0].data[0].value = (all / MAX / 10000 * 100) .toFixed(2) - 0;
     myChart.setOption(option,true);	
     countup.update(all);
 	})
