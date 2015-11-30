@@ -148,6 +148,9 @@ require([
           text: '总订单（单位:万$）',
           subtext: 'Power By Chicv Tech'
       },
+      legend: {
+	      data:['目标：' + MAX + 'W$']
+	    },
       toolbox: {
           show: true,
           feature: {
