@@ -1,6 +1,6 @@
 var socket = io('http://' + window.location.host);
 var $canvas = $('canvas');
-var MAX = 20;
+var MAX = 15;
 
 require.config({
 	paths: {
@@ -185,13 +185,13 @@ require([
               formatter: function(v) {
                   switch (v + '') {
                       case '20':
-                          return parseInt((20/100 * MAX)).toString();
+                          return (20/100 * MAX).toFixed(1);
                       case '50':
-                          return parseInt((50/100 * MAX)).toString();
+                          return (50/100 * MAX).toFixed(1);
                       case '80':
-                          return parseInt((80/100 * MAX)).toString();
+                          return (80/100 * MAX).toFixed(1);
                       case '100':
-                          return parseInt((100/100 * MAX)).toString();
+                          return (100/100 * MAX).toFixed(1);
                       default:
                           return '';
                   }
