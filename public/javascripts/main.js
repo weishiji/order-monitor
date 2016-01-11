@@ -1,6 +1,6 @@
 var socket = io('http://' + window.location.host);
 var $canvas = $('canvas');
-var MAX = 15;
+var MAX = 18;
 
 require.config({
 	paths: {
