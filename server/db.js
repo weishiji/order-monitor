@@ -1,7 +1,7 @@
+var mysql = require('mysql');
 var config = require('../config');
 
 function _exec(sqls,values,after){
-    var mysql = require('mysql');
     
     var client = mysql.createConnection(config.db);
     client.connect();
