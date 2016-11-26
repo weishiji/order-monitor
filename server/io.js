@@ -73,9 +73,9 @@ function sendSellWellData(socket){
 		})
   }
   getSocket(function(socket){
-  	sendSellWellData(socket);
+  	//sendSellWellData(socket);
   	sendSoldAllData(socket);
-  	sendHotSoldData(socket);
+  	//sendHotSoldData(socket);
   })
 
 // io.on('connection', function (socket) {
