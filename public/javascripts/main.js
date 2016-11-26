@@ -71,7 +71,8 @@ require([
 	socket.on('sellWell', function (data) {
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
-	 	for(var i=0;i<data.length;i+=1){
+	  if(!data) return;	
+      for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
 	 		option.yAxis[0].data.unshift(temp.name);
 	 		option.series[0].data.unshift(temp.m_total);
@@ -123,7 +124,8 @@ require([
 	socket.on('hotSold', function (data) {
 	  option.yAxis[0].data = [];
 	  option.series[0].data = [];
-	 	for(var i=0;i<data.length;i+=1){
+      if(!data) return;
+	  for(var i=0;i<data.length;i+=1){
 	 		var temp = data[i];
 	 		option.yAxis[0].data.unshift(temp.product_id);
 	 		option.series[0].data.unshift(temp.p_total);
@@ -251,6 +253,7 @@ require([
 		$diff.remove();
 	});	
 	socket.on('soldAll',function(data){
+        console.log(data)
 		var originValue = $orderAll.find('span').html().split(',').join('').substr(1) - 0
 		var all = data.sold_total;
 		diffValue = all - originValue;

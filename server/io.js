@@ -31,8 +31,8 @@ function sendSellWellData(socket){
       ' ON (o.order_id = po.order_id AND date(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")))' +
 	    ' INNER JOIN oc_order_product op ON (o.order_id = op.order_id)' +
 	    ' INNER JOIN oc_product p ON (op.product_id = p.product_id)' +
-	    ' INNER JOIN oc_manufacturer m ON (p.manufacturer_id = m.manufacturer_id)' +
-			' GROUP BY m.manufacturer_id' +
+	    ' INNER JOIN oc_brand m ON (p.brand_id = m.brand_id)' +
+			' GROUP BY m.brand_id' +
 			' ORDER BY m_total DESC' +
 			' LIMIT 5;' 
   	exec(sql,function(err,rows){
