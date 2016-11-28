@@ -46,7 +46,8 @@ function sendSellWellData(socket){
   	var sql = 'select sum(po.total) as sold_total from oc_paypal_order as po' + 
 			' where DATE(convert_tz(po.date_added, "+0:00", "+8:00")) = DATE(CONVERT_TZ(NOW(), "+0:00", "+8:00")) limit 1;'
 		exec(sql,function(err,rows){
-			socket.emit('soldAll',rows[0]);
+			io.sockets.emit('soldAll',rows[0]);
+			//socket.broadcast.emit('soldAll',rows[0]);
 			setTimeout(function(){
 				sendSoldAllData(socket);
 			},timeLoop);
