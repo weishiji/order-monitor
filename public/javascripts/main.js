@@ -1,10 +1,10 @@
 var socket = io('http://' + window.location.host);
 var $canvas = $('canvas');
 var maxs = {
-	0:40,
-	1:20,
-	2:10,
-	3:10,
+	0:28,
+	1:16,
+	2:4,
+	3:8,
 };
 
 require.config({
