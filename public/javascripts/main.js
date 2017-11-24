@@ -284,7 +284,7 @@ require([
 			var siteId = v.site_id;
 			var MAX = maxs[siteId];
 			var orderAll = $('.order-all[site-id='+siteId+']');
-				var originValue = orderAll.find('span').html().split(',').join('').substr(1) - 0
+				var originValue = (orderAll.find('span').html()||'$0').split(',').join('').substr(1) - 0
 				var all = v.sold_total;
 				diffValue = all - originValue;
 				if(diffValue === 0){
