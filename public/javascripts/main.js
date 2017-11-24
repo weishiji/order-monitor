@@ -293,8 +293,8 @@ require([
                     //           'style' : 'position:absolute;top:0;text-align:center;color:green;'
                     //          }).html('$' + diffValue).appendTo(orderAll)
                 }
-                charts[siteId]['option'].series[0].data[0].value = (all / MAX / 10000 * 100) .toFixed(2) - 0;
-                charts[siteId]['chart'].setOption(charts[siteId]['option'],true);
+                // charts[siteId]['option'].series[0].data[0].value = (all / MAX / 10000 * 100) .toFixed(2) - 0;
+                // charts[siteId]['chart'].setOption(charts[siteId]['option'],true);
                 gauges[siteId]['countup'].update(all);
             }
 	});

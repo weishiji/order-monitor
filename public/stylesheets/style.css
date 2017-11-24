@@ -28,6 +28,7 @@ body{
   font-weight: bold;
   text-align: center;
   display: block;
+  line-height: 200px;
   border-bottom: 1px solid #ccc;
 }
 
@@ -38,8 +39,12 @@ body{
 
 .box .item .box-canvas{
   border: 1px solid #ccc;
-  width: 50%;
+  width: 100%;
   float: left;
+}
+.box .item .box-canvas h2{
+  font-size: 36px;
+  text-align: center;
 }
 .box .item .box-canvas{
   height: 270px;
