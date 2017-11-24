@@ -39,7 +39,7 @@ body{
 
 .box .item .box-canvas{
   border: 1px solid #ccc;
-  width: 100%;
+  width: 50%;
   float: left;
 }
 .box .item .box-canvas h2{
