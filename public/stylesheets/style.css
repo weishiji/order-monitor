@@ -8,28 +8,39 @@ body{
 *{
 	box-sizing: border-box;
 }
-.box-canvas{
-	position: absolute;
-	width:50%;
-	height: 50%;
-	display: inline-block;
+.box-top{
+  overflow: hidden;
 }
-.box-canvas.top{
-	top:0;
+.box-top .item{
+  width: 33.3%;
+  float: left;
+  border: 1px solid #ccc;
 }
-.box-canvas.left{
-	left :0;
+.box-top .item .box-canvas{
+  height: 150px;
 }
-.box-canvas.right{
-	right:0;
+.box-top .item  .gauge{
+  height: 270px;
+
 }
-.box-canvas.bottom{
-	bottom:0;
+.box-top .item .box-canvas span,.box .item .box-canvas span{
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  border-bottom: 1px solid #ccc;
 }
-.box-canvas{
-	border:1px solid #ddd;
+
+
+.box .item{
+  overflow: hidden;
 }
-#order-all{
-	font-size: 80px;
-	text-align: center;
+
+.box .item .box-canvas{
+  border: 1px solid #ccc;
+  width: 50%;
+  float: left;
+}
+.box .item .box-canvas{
+  height: 270px;
 }
