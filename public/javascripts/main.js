@@ -283,19 +283,21 @@ require([
 		data.map(function(v){
 			var siteId = v.site_id;
 			var MAX = maxs[siteId];
-			var orderAll = $('.order-all[site-id='+siteId+']');
-				var originValue = (orderAll.find('span').html()||'$0').split(',').join('').substr(1) - 0
-				var all = v.sold_total;
-				diffValue = all - originValue;
-				if(diffValue === 0){
-						// gauges[siteId]['diff'] = $('<div/>',{
-				    //           'style' : 'position:absolute;top:0;text-align:center;color:green;'
-				    //          }).html('$' + diffValue).appendTo(orderAll)
-				}
-				charts[siteId]['option'].series[0].data[0].value = (all / MAX / 10000 * 100) .toFixed(2) - 0;
-		    charts[siteId]['chart'].setOption(charts[siteId]['option'],true);
-		    gauges[siteId]['countup'].update(all);
-		});
+            var orderAll = $('.order-all[site-id='+siteId+']');
+            if(orderAll.length){
+                var originValue = orderAll.find('span').html().split(',').join('').substr(1) - 0
+                var all = v.sold_total;
+                diffValue = all - originValue;
+                if(diffValue === 0){
+                    // gauges[siteId]['diff'] = $('<div/>',{
+                    //           'style' : 'position:absolute;top:0;text-align:center;color:green;'
+                    //          }).html('$' + diffValue).appendTo(orderAll)
+                }
+                charts[siteId]['option'].series[0].data[0].value = (all / MAX / 10000 * 100) .toFixed(2) - 0;
+                charts[siteId]['chart'].setOption(charts[siteId]['option'],true);
+                gauges[siteId]['countup'].update(all);
+            }
+	});
 	})
 
 })
