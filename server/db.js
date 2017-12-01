@@ -4,17 +4,16 @@ var config = require('../config');
 function _exec(sqls,values,after){
     
     var client = mysql.createConnection(config.db);
-    client.connect();
     var cb = function(err,rs,fields){
         //client.end();
             return values(err,rs,fields)
     }
     var query = client.query(sqls || '', cb || [],function(err,r){          
         after(err,r);
+        client.end();
     });
 
     //console.log(query.sql)
-    client.end();
     // client.end(function(err){
     //     console.log(err,'this is error')
     // });
