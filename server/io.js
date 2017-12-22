@@ -4,7 +4,7 @@ var dateFormat = require('dateformat');
 
 var currentDate = dateFormat(new Date(),'yyyy-mm-dd');
 var timeLoop = 30000;
-
+var timer = 0;
 function getSocket(fun){
 	io.on('connection',function(socket){
 		if(typeof fun === 'function'){
@@ -52,7 +52,8 @@ WHERE o.date_paid IS NOT NULL AND \
 GROUP BY o.site_id;'
 		exec(sql,function(err,rows){
             io.sockets.emit('soldAll',rows);
-			setTimeout(function(){
+            clearTimeout(timer);
+			timer = setTimeout(function(){
 				sendSoldAllData(socket);
 			},timeLoop);
 		})
